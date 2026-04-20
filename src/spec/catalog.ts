@@ -144,17 +144,23 @@ export const epigraphdbCatalog: ApiCatalog = {
         },
 
         // ===================================================================
-        // Protein networks
+        // Protein networks (POST — upstream rejects GET with 405)
         // ===================================================================
         {
-            method: "GET",
+            method: "POST",
             path: "/protein/ppi",
-            summary: "First-order protein-protein interactors for a gene or UniProt accession",
+            summary:
+                "First-order protein-protein interactors. POST body: { uniprot_id_list: string[] } with UniProtKB accessions (e.g. ['P04637'] for TP53). Gene symbols are NOT accepted — resolve them first via /mappings/gene-to-protein or UniProt.",
             category: "networks",
-            queryParams: [
-                { name: "protein_name", type: "string", required: false, description: "UniProt protein name" },
-                { name: "uniprot_id", type: "string", required: false, description: "UniProt accession" },
-            ],
+            queryParams: [],
+        },
+        {
+            method: "POST",
+            path: "/protein/ppi/pairwise",
+            summary:
+                "Pairwise PPI evidence for a protein list. POST body: { uniprot_id_list: string[] } with UniProtKB accessions.",
+            category: "networks",
+            queryParams: [],
         },
     ],
 };
