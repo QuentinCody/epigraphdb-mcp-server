@@ -23,6 +23,8 @@ export function registerCodeMode(
 
     const executeTool = createExecuteTool({
         prefix: "epigraphdb",
+        // Verifiable provenance: epigraphdb_execute results carry a _meta.citation.
+        source: { id: "epigraphdb", name: "EpiGraphDB", url: "https://epigraphdb.org" },
         catalog: epigraphdbCatalog,
         apiFetch,
         doNamespace: env.EPIGRAPHDB_DATA_DO,
