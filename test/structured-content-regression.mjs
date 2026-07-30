@@ -51,7 +51,7 @@ assertContains('src/tools/get-schema.ts', schemaContent, 'epigraphdb_get_schema'
 
 const indexContent = readFile('src/index.ts');
 assertContains('src/index.ts', indexContent, 'EpiGraphDbDataDO', 'index.ts exports EpiGraphDbDataDO');
-assertContains('src/index.ts', indexContent, 'McpAgent', 'index.ts uses McpAgent');
+assertContains('src/index.ts', indexContent, 'StatelessMcpWorker', 'index.ts uses StatelessMcpWorker');
 
 const catalogContent = readFile('src/spec/catalog.ts');
 assertContains('src/spec/catalog.ts', catalogContent, 'epigraphdbCatalog', 'catalog exports epigraphdbCatalog');
