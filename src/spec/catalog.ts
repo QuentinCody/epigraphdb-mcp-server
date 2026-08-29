@@ -13,7 +13,7 @@ export const epigraphdbCatalog: ApiCatalog = {
     baseUrl: "https://api.epigraphdb.org",
     version: "1.0",
     auth: "none",
-    endpointCount: 12,
+    endpointCount: 13,
     notes:
         "- ALWAYS start with a connectivity-guard call (`/ping`) before heavy queries if the API seems flaky.\n" +
         "- Most endpoints return `{ metadata, results: [...] }` — use `results` downstream.\n" +
