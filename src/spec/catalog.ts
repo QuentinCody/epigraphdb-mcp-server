@@ -1,4 +1,5 @@
 import type { ApiCatalog } from "@bio-mcp/shared/codemode/catalog";
+import { evidenceEndpoints, evidenceWorkflows } from "./evidence";
 
 /**
  * EpiGraphDB (https://api.epigraphdb.org) — integrated epidemiology graph
@@ -13,15 +14,20 @@ export const epigraphdbCatalog: ApiCatalog = {
     baseUrl: "https://api.epigraphdb.org",
     version: "1.0",
     auth: "none",
-    endpointCount: 13,
+    endpointCount: 15 + evidenceEndpoints.length,
     notes:
         "- ALWAYS start with a connectivity-guard call (`/ping`) before heavy queries if the API seems flaky.\n" +
-        "- Most endpoints return `{ metadata, results: [...] }` — use `results` downstream.\n" +
+        "- Most endpoints return `{ metadata, results: [...] }`; preserve metadata, source IDs and staging handles.\n" +
         "- Mendelian Randomization (`/mr`) is the flagship endpoint: give it `exposure_trait` + `outcome_trait` (free text).\n" +
         "- Ontology mapping (`/ontology/gwas-efo`) expects `trait`, `score_threshold`, and `fuzzy=true` for natural language.\n" +
         "- Gene endpoints accept `gene_name` (symbol) or Ensembl IDs; druggability/ppi endpoints surface tractable targets.\n" +
-        "- Literature endpoints return PubMed-linked triples; large responses should be staged.",
+        "- Literature endpoints return PubMed-linked triples; large responses should be staged.\n" +
+        "- Correlation, pathway membership and MR are distinct evidence. New evidence routes retain live database builds and unknown genome assembly; /pqtl/ and /xqtl/ have distinct coverage. No native pagination is documented for the new routes.\n" +
+        "- Whole results over 30 KiB stage, including SQL/schema/errors. Preserve __staged handles and inspect get_schema. results retains native_json plus scalar/legacy flattened columns; nested objects and arrays have JSON text columns. Counts are one observation, not expanded rows.\n" +
+        "- /literature/mr is absent from the current native OpenAPI and returned 404. Use /literature/gwas/pairwise for trait-pair literature evidence; it is not evidence that an MR estimate is causal.",
+    workflows: evidenceWorkflows,
     endpoints: [
+        ...evidenceEndpoints,
         // ===================================================================
         // Connectivity guards — call these first when unsure
         // ===================================================================
@@ -80,7 +86,7 @@ export const epigraphdbCatalog: ApiCatalog = {
             category: "ontology",
             queryParams: [
                 { name: "trait", type: "string", required: true, description: "Free-text trait (e.g. 'asthma')" },
-                { name: "score_threshold", type: "number", required: false, description: "Minimum similarity score (default 0.7)" },
+                { name: "score_threshold", type: "number", required: false, description: "Minimum similarity score (native default 0.75)" },
                 { name: "fuzzy", type: "boolean", required: false, description: "Enable fuzzy matching" },
             ],
         },
@@ -113,7 +119,7 @@ export const epigraphdbCatalog: ApiCatalog = {
             category: "gene_drug",
             queryParams: [
                 { name: "trait", type: "string", required: false, description: "Disease trait name" },
-                { name: "drug_name", type: "string", required: false, description: "Drug name" },
+                { name: "pval_threshold", type: "number", required: false, description: "Native p-value threshold, default 1e-8; drug_name is not a documented filter" },
             ],
         },
 
@@ -126,15 +132,18 @@ export const epigraphdbCatalog: ApiCatalog = {
             summary: "PubMed evidence for GWAS trait associations (SemMedDB triples)",
             category: "literature",
             queryParams: [
-                { name: "trait", type: "string", required: true, description: "GWAS trait" },
-                { name: "semmed_predicates", type: "string", required: false, description: "Comma-separated SemMedDB predicates (e.g. 'CAUSES,TREATS')" },
-                { name: "by_gwas_id", type: "boolean", required: false, description: "Set true to treat `trait` as a GWAS ID" },
+                { name: "trait", type: "string", required: false, description: "GWAS trait label when by_gwas_id is false" },
+                { name: "gwas_id", type: "string", required: false, description: "GWAS study identifier when by_gwas_id is true" },
+                { name: "semmed_predicates", type: "array", required: false, description: "SemMedDB predicate whitelist as repeated native query parameters; pass an array, not a comma-joined string." },
+                { name: "by_gwas_id", type: "boolean", required: false, description: "Set true to use gwas_id instead of trait" },
+                { name: "limit", type: "number", required: false, description: "Native page size 1–1000, default 50; do not infer a total." },
+                { name: "skip", type: "number", required: false, description: "Native offset, default 0." },
             ],
         },
         {
             method: "GET",
             path: "/literature/mr",
-            summary: "Literature support for an MR-inferred exposure → outcome relationship",
+            summary: "Unsupported legacy catalog path: native HTTP 404 and absent from current OpenAPI. Use /literature/gwas/pairwise for distinct trait-pair literature evidence; no MR-validation claim.",
             category: "literature",
             queryParams: [
                 { name: "exposure_trait", type: "string", required: true, description: "Exposure trait" },
@@ -143,6 +152,18 @@ export const epigraphdbCatalog: ApiCatalog = {
             ],
         },
 
+        {method:"GET",path:"/literature/gwas/pairwise",category:"literature",summary:"Native trait-pair subject/predicate/object literature graph; distinct from MR estimates and causal validation.",queryParams:[
+            {name:"trait",type:"string",required:false,description:"First native trait label."},
+            {name:"assoc_trait",type:"string",required:false,description:"Associated native trait label."},
+            {name:"gwas_id",type:"string",required:false,description:"First GWAS study ID when by_gwas_id is true."},
+            {name:"assoc_gwas_id",type:"string",required:false,description:"Associated GWAS study ID when by_gwas_id is true."},
+            {name:"by_gwas_id",type:"boolean",required:false,description:"Use study identifiers instead of labels."},
+            {name:"limit",type:"number",required:false,description:"Native 1–2000 rows, default 50."},
+            {name:"skip",type:"number",required:false,description:"Native offset, default 0."},
+            {name:"semmantic_types",type:"array",required:false,description:"Native spelling; repeated semantic-type values. Defaults to nusq."},
+            {name:"blacklist",type:"boolean",required:false,description:"Exclude listed types when true (default), include when false."},
+        ]},
+        {method:"POST",path:"/mappings/gene-to-protein",category:"networks",summary:"Resolve HGNC symbols or Ensembl gene IDs to native UniProt mappings; preserve one-to-many results.",description:"JSON body {gene_name_list:string[]} by default, or {gene_id_list:string[],by_gene_id:true}. Use returned accessions in PPI/pathway queries; do not treat symbols as UniProt IDs."},
         // ===================================================================
         // Protein networks (POST — upstream rejects GET with 405)
         // ===================================================================

@@ -1,0 +1,786 @@
+[
+  {
+    "url": "https://api.epigraphdb.org/builds",
+    "status": 200,
+    "source_sha256": "e555775af2e2687fada95a8232a051076a1471015b1f0eb017c434bfd874ed3e",
+    "source_bytes": 89,
+    "retrieved_at": "2026-10-04T07:43:09.713Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "epigraphdb": {
+        "overall": "1.0",
+        "database": "1.0",
+        "api": "1.0",
+        "web_app": null
+      },
+      "pqtl": "3.0"
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/genetic-cor?trait=Waist%20circumference&cor_coef_threshold=0.8",
+    "status": 200,
+    "source_sha256": "37e7962601aa6c5ce6c50fa6b505bda7ba54287c758f2ed027f4e7f21cd4dcb4",
+    "source_bytes": 51002,
+    "retrieved_at": "2026-10-04T07:43:10.395Z",
+    "selection": "First three rows plus first negative correlation if present; metadata retained; not full response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (trait:Gwas)-[gc:GEN_COR]-(assoc_trait:Gwas) WHERE trait.trait = \"Waist circumference\" AND abs(gc.rg) > 0.8 RETURN trait {.id, .trait}, assoc_trait {.id, .trait}, gc { .rg, .rg_SE, .Z, .p, .rg_intercept, .rg_intercept_SE, .h2, .h2_SE, .h2_intercept, .h2_intercept_SE } ORDER BY gc.rg DESC ;",
+        "total_seconds": 0.060831,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "trait": {
+            "id": "ukb-a-382",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-a-287",
+            "trait": "Arm fat mass (left)"
+          },
+          "gc": {
+            "Z": 278.9,
+            "p": 9.999999999999994e-309,
+            "rg": 0.9541,
+            "rg_SE": 0.003421,
+            "rg_intercept": 0.9111,
+            "rg_intercept_SE": 0.01661,
+            "h2": 0.203,
+            "h2_SE": 0.006928,
+            "h2_intercept": 1.055,
+            "h2_intercept_SE": 0.0172
+          }
+        },
+        {
+          "trait": {
+            "id": "ukb-a-382",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-8338",
+            "trait": "Arm fat mass (left)"
+          },
+          "gc": {
+            "Z": 278.9,
+            "p": 9.999999999999994e-309,
+            "rg": 0.9541,
+            "rg_SE": 0.003421,
+            "rg_intercept": 0.9111,
+            "rg_intercept_SE": 0.01661,
+            "h2": 0.203,
+            "h2_SE": 0.006928,
+            "h2_intercept": 1.055,
+            "h2_intercept_SE": 0.0172
+          }
+        },
+        {
+          "trait": {
+            "id": "ukb-a-382",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-7212",
+            "trait": "Leg fat mass (left)"
+          },
+          "gc": {
+            "Z": 330.4,
+            "p": 9.999999999999994e-309,
+            "rg": 0.9541,
+            "rg_SE": 0.002888,
+            "rg_intercept": 0.9081,
+            "rg_intercept_SE": 0.01695,
+            "h2": 0.203,
+            "h2_SE": 0.006928,
+            "h2_intercept": 1.055,
+            "h2_intercept_SE": 0.0172
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/obs-cor?trait=Waist%20circumference&cor_coef_threshold=0.8",
+    "status": 200,
+    "source_sha256": "8ca85cb96007e6ac5e537cd48c5bccad5a7c4e3ff7326d59e56c4c26ba70e6c6",
+    "source_bytes": 1226,
+    "retrieved_at": "2026-10-04T07:43:10.539Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (trait:Gwas)-[obs_cor:OBS_COR]-(assoc_trait:Gwas) WHERE trait.trait = \"Waist circumference\" AND abs(obs_cor.cor) > 0.8 RETURN trait {.id, .trait}, assoc_trait {.id, .trait}, obs_cor {.cor} ORDER BY obs_cor.cor DESC ;",
+        "total_seconds": 0.036858,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "trait": {
+            "id": "ukb-b-9405",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-11842",
+            "trait": "Weight"
+          },
+          "obs_cor": {
+            "cor": 0.878521630374856
+          }
+        },
+        {
+          "trait": {
+            "id": "ukb-b-9405",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-11842",
+            "trait": "Weight"
+          },
+          "obs_cor": {
+            "cor": 0.878521630374856
+          }
+        },
+        {
+          "trait": {
+            "id": "ukb-b-9405",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-12039",
+            "trait": "Weight"
+          },
+          "obs_cor": {
+            "cor": 0.871360904191991
+          }
+        },
+        {
+          "trait": {
+            "id": "ukb-b-9405",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-12039",
+            "trait": "Weight"
+          },
+          "obs_cor": {
+            "cor": 0.871360904191991
+          }
+        },
+        {
+          "trait": {
+            "id": "ukb-b-9405",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-19953",
+            "trait": "Body mass index (BMI)"
+          },
+          "obs_cor": {
+            "cor": 0.802693232651605
+          }
+        },
+        {
+          "trait": {
+            "id": "ukb-b-9405",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-19953",
+            "trait": "Body mass index (BMI)"
+          },
+          "obs_cor": {
+            "cor": 0.802693232651605
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/list/?flag=exposures",
+    "status": 200,
+    "source_sha256": "b820f7bde0f82663b340a6448afacc6ec76e07149f1438c28a61d97e51f2643d",
+    "source_bytes": 18045,
+    "retrieved_at": "2026-10-04T07:43:10.690Z",
+    "selection": "First three rows plus first negative correlation if present; metadata retained; not full response.",
+    "data": {
+      "metadata": {
+        "query": "match (e:Exposure) return distinct e.expID as expID;",
+        "total_seconds": null,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "expID": "A1CF"
+        },
+        {
+          "expID": "ACP1"
+        },
+        {
+          "expID": "ACP2"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/list/?flag=outcomes",
+    "status": 200,
+    "source_sha256": "318f63f4d7b96d4f12a2aac46fdea3f9e8b8e6e2d39228670a97cc98d512e4ca",
+    "source_bytes": 11193,
+    "retrieved_at": "2026-10-04T07:43:10.811Z",
+    "selection": "First three rows plus first negative correlation if present; metadata retained; not full response.",
+    "data": {
+      "metadata": {
+        "query": "match (o:Outcome) return distinct o.outID as outID;",
+        "total_seconds": null,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "outID": "Cancer code  self-reported: basal cell carcinoma"
+        },
+        {
+          "outID": "Cancer code  self-reported: malignant melanoma"
+        },
+        {
+          "outID": "Cancer code  self-reported: small intestine or small bowel cancer"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pathway?trait=LDL%20cholesterol&pval_threshold=0.00001",
+    "status": 200,
+    "source_sha256": "d98c314091786c9f3279886a8293e06837be96b3829819284a0e530623bf8a2e",
+    "source_bytes": 279195,
+    "retrieved_at": "2026-10-04T07:43:57.400Z",
+    "selection": "First three rows plus first negative correlation if present; metadata retained; not full response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (gwas:Gwas {trait: \"LDL cholesterol\"}) -[gwas_to_variant:GWAS_TO_VARIANT]->(variant:Variant)-[variant_to_gene:VARIANT_TO_GENE]-> (gene:Gene)-[gene_to_protein:GENE_TO_PROTEIN]->(protein:Protein) -[protein_in_pathway:PROTEIN_IN_PATHWAY]->(pathway:Pathway) WHERE gwas_to_variant.pval < 1e-05 AND gene.name is not null RETURN gwas {.id, .trait}, gwas_to_variant {.beta, .se, .pval, .eaf, .samplesize}, variant {.name}, gene {.name}, protein {.uniprot_id}, pathway {.id, .name} ORDER BY gwas_to_variant.pval ;",
+        "total_seconds": 0.155881,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "gwas": {
+            "id": "ieu-a-300",
+            "trait": "LDL cholesterol"
+          },
+          "gwas_to_variant": {
+            "beta": -0.4853,
+            "se": 0.0119,
+            "pval": 1e-200,
+            "samplesize": 139198,
+            "eaf": 0.03166
+          },
+          "variant": {
+            "name": "rs7254892"
+          },
+          "gene": {
+            "name": "TOMM40"
+          },
+          "protein": {
+            "uniprot_id": "O96008"
+          },
+          "pathway": {
+            "id": "R-HSA-9663891",
+            "name": "Selective autophagy"
+          }
+        },
+        {
+          "gwas": {
+            "id": "ieu-a-300",
+            "trait": "LDL cholesterol"
+          },
+          "gwas_to_variant": {
+            "beta": -0.4853,
+            "se": 0.0119,
+            "pval": 1e-200,
+            "samplesize": 139198,
+            "eaf": 0.03166
+          },
+          "variant": {
+            "name": "rs7254892"
+          },
+          "gene": {
+            "name": "TOMM40"
+          },
+          "protein": {
+            "uniprot_id": "O96008"
+          },
+          "pathway": {
+            "id": "R-HSA-9612973",
+            "name": "Autophagy"
+          }
+        },
+        {
+          "gwas": {
+            "id": "ieu-a-300",
+            "trait": "LDL cholesterol"
+          },
+          "gwas_to_variant": {
+            "beta": -0.4853,
+            "se": 0.0119,
+            "pval": 1e-200,
+            "samplesize": 139198,
+            "eaf": 0.03166
+          },
+          "variant": {
+            "name": "rs7254892"
+          },
+          "gene": {
+            "name": "TOMM40"
+          },
+          "protein": {
+            "uniprot_id": "O96008"
+          },
+          "pathway": {
+            "id": "R-HSA-9609507",
+            "name": "Protein localization"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/protein/in-pathway",
+    "status": 200,
+    "source_sha256": "562cf4b62215ffdd27d05fa0528bedf935870925a8093bd07e8c5bd5e70e090f",
+    "source_bytes": 1808,
+    "retrieved_at": "2026-10-04T07:43:57.744Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH p=(protein:Protein)-[r:PROTEIN_IN_PATHWAY]-(pathway:Pathway) WHERE protein.uniprot_id IN ['O14933', 'O60674', 'P32455'] RETURN protein.uniprot_id AS uniprot_id, count(p) AS pathway_count, collect(pathway.id) AS pathway_reactome_id",
+        "total_seconds": 0.038715,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "uniprot_id": "O14933",
+          "pathway_count": 17,
+          "pathway_reactome_id": [
+            "R-HSA-983169",
+            "R-HSA-983168",
+            "R-HSA-977225",
+            "R-HSA-936440",
+            "R-HSA-913531",
+            "R-HSA-73894",
+            "R-HSA-73893",
+            "R-HSA-5656169",
+            "R-HSA-392499",
+            "R-HSA-168928",
+            "R-HSA-168256",
+            "R-HSA-168249",
+            "R-HSA-1280218",
+            "R-HSA-1280215",
+            "R-HSA-1169410",
+            "R-HSA-1169408",
+            "R-HSA-110313"
+          ]
+        },
+        {
+          "uniprot_id": "O60674",
+          "pathway_count": 62,
+          "pathway_reactome_id": [
+            "R-HSA-983231",
+            "R-HSA-982772",
+            "R-HSA-9679506",
+            "R-HSA-9679191",
+            "R-HSA-9670439",
+            "R-HSA-9669938",
+            "R-HSA-9656223",
+            "R-HSA-9649948",
+            "R-HSA-9607240",
+            "R-HSA-913531",
+            "R-HSA-912526",
+            "R-HSA-9027284",
+            "R-HSA-9027283",
+            "R-HSA-9027277",
+            "R-HSA-9027276",
+            "R-HSA-9020956",
+            "R-HSA-9020933",
+            "R-HSA-9020591",
+            "R-HSA-9006934",
+            "R-HSA-9006335",
+            "R-HSA-8984722",
+            "R-HSA-8854691",
+            "R-HSA-877312",
+            "R-HSA-877300",
+            "R-HSA-69278",
+            "R-HSA-69236",
+            "R-HSA-69231",
+            "R-HSA-6802957",
+            "R-HSA-6802955",
+            "R-HSA-6802952",
+            "R-HSA-6802949",
+            "R-HSA-6802946",
+            "R-HSA-6788467",
+            "R-HSA-6785807",
+            "R-HSA-6783589",
+            "R-HSA-5684996",
+            "R-HSA-5683057",
+            "R-HSA-5673001",
+            "R-HSA-5673000",
+            "R-HSA-5663205",
+            "R-HSA-5663202",
+            "R-HSA-512988",
+            "R-HSA-4839726",
+            "R-HSA-453279",
+            "R-HSA-451927",
+            "R-HSA-449147",
+            "R-HSA-447115",
+            "R-HSA-3247509",
+            "R-HSA-3214858",
+            "R-HSA-2586552",
+            "R-HSA-168256",
+            "R-HSA-1643685",
+            "R-HSA-1640170",
+            "R-HSA-162582",
+            "R-HSA-1433557",
+            "R-HSA-1280215",
+            "R-HSA-1170546",
+            "R-HSA-112411",
+            "R-HSA-112409",
+            "R-HSA-110056",
+            "R-HSA-109582",
+            "R-HSA-1059683"
+          ]
+        },
+        {
+          "uniprot_id": "P32455",
+          "pathway_count": 4,
+          "pathway_reactome_id": [
+            "R-HSA-913531",
+            "R-HSA-877300",
+            "R-HSA-168256",
+            "R-HSA-1280215"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/?query=ADAM15&searchflag=proteins&rtype=simple&pvalue=0.00001",
+    "status": 200,
+    "source_sha256": "7ee0cd54ebb9c4887ac0b6e82228c56a231a920a8ee8a8869c0e65eb4c9382b4",
+    "source_bytes": 1005,
+    "retrieved_at": "2026-10-04T07:43:57.880Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (e:Exposure)<-[n:SENS_EXP]-(s)-[m:SENS_OUT]-> (o:Outcome)<-[r:MR]-(e:Exposure)<-[i:INST_EXP]-() WHERE e.expID = \"ADAM15\" AND r.pvalue < toFloat(\"1e-05\") AND s.rs_ID = i.rs_ID RETURN DISTINCT s.expID AS expID, s.outID AS outID, s.outID_mrbase AS outID_mrbase, r.nsnp AS nsnp, r.pvalue AS pvalue, s.rs_ID AS rsID, s.direction AS direction, s.steiger_pvalue AS steiger_pvalue, s.coloc_prob AS coloc_prob, r.beta AS beta, r.method AS method, i.trans_cis AS trans_cis, toFloat(r.mr_hetero_pvalue) AS q_pvalue, s.ld_score AS ld_check, r.se AS se ORDER BY pvalue, outID;",
+        "total_seconds": null,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "expID": "ADAM15",
+          "outID": "Non-cancer illness code  self-reported: high cholesterol",
+          "outID_mrbase": "UKB-a:108",
+          "nsnp": 1,
+          "pvalue": 0.00000374006279226831,
+          "rsID": "rs7949566",
+          "direction": "NA",
+          "steiger_pvalue": null,
+          "coloc_prob": null,
+          "beta": -0.243289811709403,
+          "method": "Wald ratio",
+          "trans_cis": "trans",
+          "q_pvalue": null,
+          "ld_check": null,
+          "se": 0.0525994735936868
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/?query=ADAM15&searchflag=proteins&rtype=mrres&pvalue=0.00001",
+    "status": 200,
+    "source_sha256": "b244d9d061a691cb2c1975f5fac2df6341a662345b8e9c1245099600071c525e",
+    "source_bytes": 640,
+    "retrieved_at": "2026-10-04T07:43:58.017Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (e:Exposure)<-[n:SENS_EXP]-(s)-[m:SENS_OUT]-> (o:Outcome)<-[r:MR]-(e:Exposure) WHERE e.expID = \"ADAM15\" AND r.pvalue < toFloat(\"1e-05\") RETURN DISTINCT r.expID AS expID, r.outID AS outID, r.outID_mrbase AS outID_mrbase, r.nsnp AS nsnp, r.method AS method, r.beta AS beta, r.se AS se, r.pvalue AS pvalue ORDER BY pvalue, outID;",
+        "total_seconds": null,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "expID": "ADAM15",
+          "outID": "Non-cancer illness code  self-reported: high cholesterol",
+          "outID_mrbase": "UKB-a:108",
+          "nsnp": 1,
+          "method": "Wald ratio",
+          "beta": -0.243289811709403,
+          "se": 0.0525994735936868,
+          "pvalue": 0.00000374006279226831
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/?query=ADAM15&searchflag=proteins&rtype=sglmr&pvalue=0.00001",
+    "status": 200,
+    "source_sha256": "26997756278d7b1bd1845b7c3bcc704c5910164385d8a95edc189278032a3b98",
+    "source_bytes": 754,
+    "retrieved_at": "2026-10-04T07:43:58.163Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (e:Exposure)<-[n:SENS_EXP]-(s)-[m:SENS_OUT]-> (o:Outcome)<-[r:MR]-(e:Exposure)<-[i:INST_EXP]-() WHERE e.expID = \"ADAM15\" AND r.pvalue < toFloat(\"1e-05\") AND s.rs_ID = i.rs_ID RETURN DISTINCT s.rs_ID AS rsID, s.expID AS expID, s.outID AS outID, s.outID_mrbase AS outID_mrbase, s.tier AS tier, s.beta_sgl AS beta_sgl, s.se_sgl AS se_slg, s.pvalue_sgl AS pvalue_sgl, i.trans_cis AS trans_cis ORDER BY pvalue_sgl, outID;",
+        "total_seconds": null,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "rsID": "rs7949566",
+          "expID": "ADAM15",
+          "outID": "Non-cancer illness code  self-reported: high cholesterol",
+          "outID_mrbase": "UKB-a:108",
+          "tier": "Tier1",
+          "beta_sgl": -0.2432898117,
+          "se_slg": 0.0525994736,
+          "pvalue_sgl": 0.00000374006279226831,
+          "trans_cis": "trans"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/?query=ADAM15&searchflag=proteins&rtype=inst&pvalue=0.00001",
+    "status": 200,
+    "source_sha256": "20243c38d47598b2f0a7b92f7a599e6191e6ada2a0630bbe856f734002c3df2c",
+    "source_bytes": 862,
+    "retrieved_at": "2026-10-04T07:43:58.298Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (e:Exposure)<-[n:INST_EXP]-(i)-[m:INST_OUT]-> (o:Outcome)<-[r:MR]-(e:Exposure) WHERE e.expID = \"ADAM15\" AND r.pvalue < toFloat(\"1e-05\") RETURN DISTINCT n.rs_ID AS rsID, n.expID AS expID, m.outID AS outID, m.outID_mrbase AS outID_mrbase, n.ea AS ea, n.nea AS nea, n.eaf_exp AS eaf_exp, n.samplesize_exp AS sample_exp, m.samplesize_out AS sample_out, n.author_exp AS author_exp, m.author_out AS author_out, n.trans_cis AS trans_cis, r.pvalue AS pvalue ORDER BY pvalue, outID;",
+        "total_seconds": null,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "rsID": "rs7949566",
+          "expID": "ADAM15",
+          "outID": "Non-cancer illness code  self-reported: high cholesterol",
+          "outID_mrbase": "UKB-a:108",
+          "ea": "A",
+          "nea": "G",
+          "eaf_exp": 0.426,
+          "sample_exp": 6861,
+          "sample_out": 337159,
+          "author_exp": "Yao",
+          "author_out": "Neale",
+          "trans_cis": "trans",
+          "pvalue": 0.00000374006279226831
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/?query=ADAM15&searchflag=proteins&rtype=sense&pvalue=0.00001",
+    "status": 200,
+    "source_sha256": "521a0b9536873d7683693ac0d2fa7f4b9fc739e53112702776fef8e8a92ee319",
+    "source_bytes": 940,
+    "retrieved_at": "2026-10-04T07:43:58.438Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (e:Exposure)<-[n:SENS_EXP]-(s)-[m:SENS_OUT]-> (o:Outcome)<-[r:MR]-(e:Exposure)<-[i:INST_EXP]-() WHERE e.expID = \"ADAM15\" AND r.pvalue < toFloat(\"1e-05\") AND s.rs_ID = i.rs_ID RETURN DISTINCT s.rs_ID AS rsID, s.expID AS expID, s.outID AS outID, s.outID_mrbase AS outID_mrbase, s.direction AS direction, s.steiger_pvalue AS steiger_pvalue, s.coloc_prob AS coloc_prob, i.trans_cis AS trans_cis, toFloat(r.mr_hetero_pvalue) AS q_pvalue, s.ld_score AS ld_check, s.outcome_snp AS outcome_snp, s.tier AS tier, r.pvalue AS pvalue ORDER BY pvalue, outID;",
+        "total_seconds": null,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "rsID": "rs7949566",
+          "expID": "ADAM15",
+          "outID": "Non-cancer illness code  self-reported: high cholesterol",
+          "outID_mrbase": "UKB-a:108",
+          "direction": "NA",
+          "steiger_pvalue": null,
+          "coloc_prob": null,
+          "trans_cis": "trans",
+          "q_pvalue": null,
+          "ld_check": null,
+          "outcome_snp": "NA",
+          "tier": "Tier1",
+          "pvalue": 0.00000374006279226831
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/pleio/?rsid=rs1260326&prflag=count",
+    "status": 200,
+    "source_sha256": "030d7e78f655231a558ad6d7ccd81f0bce4f1bf082fe2c4290dbcab5cc1d4338",
+    "source_bytes": 29,
+    "retrieved_at": "2026-10-04T07:43:58.566Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": null,
+      "results": 3
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/pleio/?rsid=rs1260326&prflag=proteins",
+    "status": 200,
+    "source_sha256": "e4fc8419e2f8d5fa1699c10f624380ccbd96c1a4b9477067f8415383682ad7bc",
+    "source_bytes": 241,
+    "retrieved_at": "2026-10-04T07:43:58.682Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (i:Instruments)-[INST_EXP]->(e:Exposure) WHERE i.rs_ID = \"rs1260326\" RETURN DISTINCT e.expID AS expID;",
+        "total_seconds": null,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "expID": "FST"
+        },
+        {
+          "expID": "SAA1"
+        },
+        {
+          "expID": "KLKB1"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/genetic-cor?trait=Waist%20circumference&cor_coef_threshold=0.5",
+    "status": 200,
+    "source_sha256": "de79ab0db84570edc84951211334e1bc963e2806e47bc4cf38aa1540aa70bdc7",
+    "source_bytes": 145908,
+    "retrieved_at": "2026-10-04T07:49:04.832Z",
+    "selection": "First three rows plus first negative correlation if present; metadata retained; not full response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (trait:Gwas)-[gc:GEN_COR]-(assoc_trait:Gwas) WHERE trait.trait = \"Waist circumference\" AND abs(gc.rg) > 0.5 RETURN trait {.id, .trait}, assoc_trait {.id, .trait}, gc { .rg, .rg_SE, .Z, .p, .rg_intercept, .rg_intercept_SE, .h2, .h2_SE, .h2_intercept, .h2_intercept_SE } ORDER BY gc.rg DESC ;",
+        "total_seconds": 0.082829,
+        "empty_results": false
+      },
+      "results": [
+        {
+          "trait": {
+            "id": "ukb-a-382",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-a-287",
+            "trait": "Arm fat mass (left)"
+          },
+          "gc": {
+            "Z": 278.9,
+            "p": 9.999999999999994e-309,
+            "rg": 0.9541,
+            "rg_SE": 0.003421,
+            "rg_intercept": 0.9111,
+            "rg_intercept_SE": 0.01661,
+            "h2": 0.203,
+            "h2_SE": 0.006928,
+            "h2_intercept": 1.055,
+            "h2_intercept_SE": 0.0172
+          }
+        },
+        {
+          "trait": {
+            "id": "ukb-a-382",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-8338",
+            "trait": "Arm fat mass (left)"
+          },
+          "gc": {
+            "Z": 278.9,
+            "p": 9.999999999999994e-309,
+            "rg": 0.9541,
+            "rg_SE": 0.003421,
+            "rg_intercept": 0.9111,
+            "rg_intercept_SE": 0.01661,
+            "h2": 0.203,
+            "h2_SE": 0.006928,
+            "h2_intercept": 1.055,
+            "h2_intercept_SE": 0.0172
+          }
+        },
+        {
+          "trait": {
+            "id": "ukb-a-382",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-7212",
+            "trait": "Leg fat mass (left)"
+          },
+          "gc": {
+            "Z": 330.4,
+            "p": 9.999999999999994e-309,
+            "rg": 0.9541,
+            "rg_SE": 0.002888,
+            "rg_intercept": 0.9081,
+            "rg_intercept_SE": 0.01695,
+            "h2": 0.203,
+            "h2_SE": 0.006928,
+            "h2_intercept": 1.055,
+            "h2_intercept_SE": 0.0172
+          }
+        },
+        {
+          "trait": {
+            "id": "ukb-b-9405",
+            "trait": "Waist circumference"
+          },
+          "assoc_trait": {
+            "id": "ukb-b-19921",
+            "trait": "Impedance of whole body"
+          },
+          "gc": {
+            "Z": -29.1,
+            "p": 3.919999999999999e-186,
+            "rg": -0.5107,
+            "rg_SE": 0.01755,
+            "rg_intercept": -0.5103,
+            "rg_intercept_SE": 0.012329999999999999,
+            "h2": 0.203,
+            "h2_SE": 0.006928,
+            "h2_intercept": 1.055,
+            "h2_intercept_SE": 0.0172
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/pleio/?rsid=rs999999999999&prflag=count",
+    "status": 200,
+    "source_sha256": "4e0897f4d16539e1a48b24129fe3444b5229ac0503a88f72a8f8bc7a3ae1814c",
+    "source_bytes": 29,
+    "retrieved_at": "2026-10-04T07:49:04.956Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": null,
+      "results": 0
+    }
+  },
+  {
+    "url": "https://api.epigraphdb.org/pqtl/?query=__no_such_protein__&rtype=simple&searchflag=proteins&pvalue=0.00001",
+    "status": 200,
+    "source_sha256": "27c8117b82d5a2d1df2c68f39505ac7b2cce668278633b4e50775d6ae84849fe",
+    "source_bytes": 666,
+    "retrieved_at": "2026-10-04T07:49:05.134Z",
+    "selection": "Complete parsed native response.",
+    "data": {
+      "metadata": {
+        "query": "MATCH (e:Exposure)<-[n:SENS_EXP]-(s)-[m:SENS_OUT]-> (o:Outcome)<-[r:MR]-(e:Exposure)<-[i:INST_EXP]-() WHERE e.expID = \"__no_such_protein__\" AND r.pvalue < toFloat(\"1e-05\") AND s.rs_ID = i.rs_ID RETURN DISTINCT s.expID AS expID, s.outID AS outID, s.outID_mrbase AS outID_mrbase, r.nsnp AS nsnp, r.pvalue AS pvalue, s.rs_ID AS rsID, s.direction AS direction, s.steiger_pvalue AS steiger_pvalue, s.coloc_prob AS coloc_prob, r.beta AS beta, r.method AS method, i.trans_cis AS trans_cis, toFloat(r.mr_hetero_pvalue) AS q_pvalue, s.ld_score AS ld_check, r.se AS se ORDER BY pvalue, outID;",
+        "total_seconds": null,
+        "empty_results": true
+      },
+      "results": []
+    }
+  }
+]
